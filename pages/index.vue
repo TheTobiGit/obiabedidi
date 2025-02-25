@@ -1,13 +1,19 @@
+<!-- File: pages/index.vue -->
+<!-- Home page with modern, app-like design -->
+
 <template>
-  <div>
+  <div class="min-h-screen">
     
   </div>
 </template>
 
-<script lang="ts" setup>
+<script setup lang="ts">
+// Import recipes from our data
+import { recipes } from '~/server/data/recipes'
+
 
 </script>
 
-<style>
+<style scoped>
 
 </style>
