@@ -8,7 +8,7 @@ export default defineNuxtConfig({
   vite: {
     plugins: [tailwindcss()],
   },
-  modules: ['@pinia/nuxt', '@vueuse/nuxt', '@nuxt/icon'],
+  modules: ['@pinia/nuxt', '@vueuse/nuxt', '@nuxt/icon', '@nuxt/image'],
   
   // Add viewport configuration for notch support
   app: {
