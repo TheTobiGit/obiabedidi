@@ -9,4 +9,14 @@ export default defineNuxtConfig({
     plugins: [tailwindcss()],
   },
   modules: ['@pinia/nuxt', '@vueuse/nuxt', '@nuxt/icon'],
+  
+  // Add viewport configuration for notch support
+  app: {
+    head: {
+      viewport: 'width=device-width, initial-scale=1, viewport-fit=cover',
+      meta: [
+        { name: 'viewport', content: 'width=device-width, initial-scale=1, viewport-fit=cover' }
+      ]
+    }
+  }
 })

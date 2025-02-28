@@ -1,1 +1,20 @@
 @import "tailwindcss";
+
+/* Global styles */
+:root {
+  /* Ensure the page takes up full viewport height including notch */
+  height: 100vh;
+  height: 100dvh; /* Dynamic viewport height for mobile browsers */
+}
+
+/* Body styles with notch area handling */
+body {
+  background-color: #f8f9fa;
+  min-height: 100vh;
+  min-height: 100dvh;
+  /* Add padding for notch areas */
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+  /* Ensure content is properly positioned */
+  position: relative;
+  width: 100%;
+}
