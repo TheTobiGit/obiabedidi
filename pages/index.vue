@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col min-h-dvh gap-5 lg:hidden">
+  <div class="flex flex-col min-h-dvh gap-5">
     <section class="flex flex-col gap-5 p-4">
       <!-- Header -->
       <div>
@@ -22,16 +22,8 @@
       </div>
     </section>
 
-    <!-- Floating Action Button -->
-    <button 
-      class="fixed bottom-6 right-6 w-14 h-14 bg-white/90 border border-black/40 rounded-full shadow-lg flex items-center justify-center transition-all duration-300 hover:bg-black/80 hover:shadow-xl hover:scale-110 active:scale-95 group z-50"
-    >
-      <Icon 
-        name="material-symbols:action-key" 
-        size="28"
-        class="w-10 h-10 text-black transition-transform duration-300 group-hover:rotate-90" 
-      />
-    </button>
+    <!-- Floating Menu -->
+    <FloatingMenu />
   </div>
 </template>
 

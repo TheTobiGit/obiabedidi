@@ -4,7 +4,7 @@
       "id": "jollof-rice",
       "name": "Jollof Rice",
       "description": "Classic GA-style rice cooked in rich tomato sauce with aromatic spices and grilled chicken.",
-      "cookingTime": "45 mins",
+      "cookingTime": "45 mins", 
       "chef": "Michael Hunog",
       "difficulty": "Medium",
       "servings": 4,
@@ -21,7 +21,7 @@
       "description": "Traditional GA breakfast of rice and beans, served with shito, gari, and boiled eggs.",
       "cookingTime": "45 mins",
       "chef": "Millicent Hunog",
-      "difficulty": "Medium",
+      "difficulty": "Medium", 
       "servings": 6,
       "rating": 4.8,
       "numReviews": 95,
@@ -89,6 +89,51 @@
       "dietaryTags": ["Vegan", "Protein-rich"],
       "allergens": [],
       "imageUrl": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=200&h=200&fit=crop"
+    },
+    {
+      "id": "tuo-zaafi",
+      "name": "Tuo Zaafi",
+      "description": "Northern specialty made from corn flour dough, served with ayoyo soup and dried fish.",
+      "cookingTime": "60 mins",
+      "chef": "Amina Salifu",
+      "difficulty": "Medium",
+      "servings": 4,
+      "rating": 4.8,
+      "numReviews": 156,
+      "cuisineType": "Northern",
+      "dietaryTags": ["Traditional", "Comfort Food"],
+      "allergens": ["Fish"],
+      "imageUrl": "https://images.unsplash.com/photo-1551183053-bf91a1d81141?q=80&w=200&h=200&fit=crop"
+    },
+    {
+      "id": "kelewele",
+      "name": "Kelewele",
+      "description": "Spicy fried plantains seasoned with ginger, garlic, and African spices. Popular street food.",
+      "cookingTime": "25 mins",
+      "chef": "Daniel Mensah",
+      "difficulty": "Easy",
+      "servings": 3,
+      "rating": 4.7,
+      "numReviews": 298,
+      "cuisineType": "GA",
+      "dietaryTags": ["Vegan", "Street Food", "Spicy"],
+      "allergens": [],
+      "imageUrl": "https://images.unsplash.com/photo-1543352634-a1c51d9f1fa7?q=80&w=200&h=200&fit=crop"
+    },
+    {
+      "id": "kontomire-stew",
+      "name": "Kontomire Stew",
+      "description": "Ashanti cocoyam leaves stew with smoked fish and meats, served with boiled yams.",
+      "cookingTime": "55 mins",
+      "chef": "Abena Osei",
+      "difficulty": "Medium",
+      "servings": 5,
+      "rating": 4.9,
+      "numReviews": 167,
+      "cuisineType": "Ashanti",
+      "dietaryTags": ["Traditional", "Protein-rich"],
+      "allergens": ["Fish"],
+      "imageUrl": "https://images.unsplash.com/photo-1547592180-85f173990554?q=80&w=200&h=200&fit=crop"
     }
   ]
-} 
+}
