@@ -15,7 +15,67 @@
       "allergens": [],
       "imageUrl": "https://images.unsplash.com/photo-1604329760661-e71dc83f8f26?q=80&w=200&h=200&fit=crop",
       "isNew": false,
-      "isTrending": true
+      "isTrending": true,
+      "ingredients": [
+        {
+          "name": "Rice",
+          "amount": 2,
+          "unit": "cups"
+        },
+        {
+          "name": "Tomatoes",
+          "amount": 4,
+          "unit": "medium"
+        },
+        {
+          "name": "Onions",
+          "amount": 2,
+          "unit": "large"
+        },
+        {
+          "name": "Garlic",
+          "amount": 3,
+          "unit": "cloves"
+        },
+        {
+          "name": "Ginger",
+          "amount": 1,
+          "unit": "thumb"
+        },
+        {
+          "name": "Vegetable Oil",
+          "amount": 0.5,
+          "unit": "cup"
+        },
+        {
+          "name": "Scotch Bonnet",
+          "amount": 2,
+          "unit": "pieces"
+        }
+      ],
+      "instructions": [
+        {
+          "step": 1,
+          "text": "Wash and soak rice for 30 minutes, then drain"
+        },
+        {
+          "step": 2,
+          "text": "Blend tomatoes, onions, garlic, and ginger into a smooth paste"
+        },
+        {
+          "step": 3,
+          "text": "Heat oil in a large pot and fry the blended mixture until reduced and fragrant"
+        },
+        {
+          "step": 4,
+          "text": "Add rice and stir well to combine"
+        },
+        {
+          "step": 5,
+          "text": "Add water, cover, and cook on low heat until rice is tender"
+        }
+      ],
+      "videoUrl": "https://www.youtube.com/watch?v=RQisbGGUzPE&t=167s&pp=ygUQam9sbG9mIHR1dG9yaWFscw%3D%3D"
     },
     {
       "id": "waakye",
@@ -23,7 +83,7 @@
       "description": "Traditional GA breakfast of rice and beans, served with shito, gari, and boiled eggs.",
       "cookingTime": 45,
       "author": "Millicent Hunog",
-      "difficulty": "Medium",
+      "difficulty": "Medium", 
       "servingSize": "large",
       "rating": "4.8",
       "numReviews": 95,
@@ -32,7 +92,57 @@
       "allergens": [],
       "imageUrl": "https://images.unsplash.com/photo-1512058564366-18510be2db19?q=80&w=200&h=200&fit=crop",
       "isNew": true,
-      "isTrending": true
+      "isTrending": true,
+      "ingredients": [
+        {
+          "name": "Rice",
+          "amount": 2,
+          "unit": "cups"
+        },
+        {
+          "name": "Beans",
+          "amount": 1,
+          "unit": "cup"
+        },
+        {
+          "name": "Shito",
+          "amount": 0.5,
+          "unit": "cup"
+        },
+        {
+          "name": "Gari",
+          "amount": 0.5,
+          "unit": "cup"
+        },
+        {
+          "name": "Boiled Eggs",
+          "amount": 4,
+          "unit": ""
+        }
+      ],
+      "instructions": [
+        {
+          "step": 1,
+          "text": "Wash and soak rice for 30 minutes, then drain"
+        },
+        {
+          "step": 2,
+          "text": "Wash and soak beans for 30 minutes, then drain"
+        },
+        {
+          "step": 3,
+          "text": "Cook rice and beans separately until tender"
+        },
+        {
+          "step": 4,
+          "text": "Mix rice and beans together"
+        },
+        {
+          "step": 5,
+          "text": "Serve with shito and gari"
+        }
+      ],
+      "videoUrl": "https://www.youtube.com/watch?v=RQisbGGUzPE&t=167s&pp=ygUQam9sbG9mIHR1dG9yaWFscw%3D%3D"
     },
     {
       "id": "banku-okro",
@@ -49,7 +159,47 @@
       "allergens": [],
       "imageUrl": "https://images.unsplash.com/photo-1559314809-0d155014e29e?q=80&w=200&h=200&fit=crop",
       "isNew": false,
-      "isTrending": true
+      "isTrending": true,
+      "ingredients": [
+        {
+          "name": "Corn Dough",
+          "amount": 2,
+          "unit": "cups"
+        },
+        {
+          "name": "Cassava Dough",
+          "amount": 1,
+          "unit": "cup"
+        },
+        {
+          "name": "Seafood Okro Soup",
+          "amount": 1,
+          "unit": "cup"
+        }
+      ],
+      "instructions": [
+        {
+          "step": 1,
+          "text": "Mix corn and cassava dough with water to form a dough"
+        },
+        {
+          "step": 2,
+          "text": "Knead the dough until smooth"
+        },
+        {
+          "step": 3,
+          "text": "Cook the dough in a pot of water until tender"
+        },
+        {
+          "step": 4,
+          "text": "Add seafood okro soup to the cooked dough"
+        },
+        {
+          "step": 5,
+          "text": "Cook until the soup is heated through"
+        }
+      ],
+      "videoUrl": "https://www.youtube.com/watch?v=RQisbGGUzPE&t=167s&pp=ygUQam9sbG9mIHR1dG9yaWFscw%3D%3D"
     },
     {
       "id": "kenkey-fish",
@@ -66,7 +216,43 @@
       "allergens": [],
       "imageUrl": "https://images.unsplash.com/photo-1590412200988-a436970781fa?q=80&w=200&h=200&fit=crop",
       "isNew": false,
-      "isTrending": false
+      "isTrending": false,
+      "ingredients": [
+        {
+          "name": "Corn Dough",
+          "amount": 1,
+          "unit": "cup"
+        },
+        {
+          "name": "Spicy Pepper Sauce",
+          "amount": 0.5,
+          "unit": "cup"
+        },
+        {
+          "name": "Grilled Tilapia",
+          "amount": 1,
+          "unit": ""
+        }
+      ],
+      "instructions": [
+        {
+          "step": 1,
+          "text": "Mix corn dough with water to form a dough"
+        },
+        {
+          "step": 2,
+          "text": "Knead the dough until smooth"
+        },
+        {
+          "step": 3,
+          "text": "Cook the dough in a pot of water until tender"
+        },
+        {
+          "step": 4,
+          "text": "Serve with spicy pepper sauce and grilled tilapia"
+        }
+      ],
+      "videoUrl": "https://www.youtube.com/watch?v=RQisbGGUzPE&t=167s&pp=ygUQam9sbG9mIHR1dG9yaWFscw%3D%3D"
     },
     {
       "id": "fufu-light-soup",
@@ -83,7 +269,48 @@
       "allergens": [],
       "imageUrl": "https://images.unsplash.com/photo-1633237308525-cd587cf71926?q=80&w=200&h=200&fit=crop",
       "isNew": true,
-      "isTrending": false
+      "isTrending": false,
+      "ingredients": [
+        {
+          "name": "Pounded Cassava",
+          "amount": 1,
+          "unit": "cup"
+        },
+        {
+          "name": "Plantain",
+          "amount": 1,
+          "unit": "cup"
+        },
+        {
+          "name": "Spicy Goat Meat",
+          "amount": 0.5,
+          "unit": "pound"
+        },
+        {
+          "name": "Light Soup",
+          "amount": 1,
+          "unit": "cup"
+        }
+      ],
+      "instructions": [
+        {
+          "step": 1,
+          "text": "Pound cassava and plantain until smooth"
+        },
+        {
+          "step": 2,
+          "text": "Cook the mixture in a pot of water until tender"
+        },
+        {
+          "step": 3,
+          "text": "Add spicy goat meat and light soup"
+        },
+        {
+          "step": 4,
+          "text": "Cook until the soup is heated through"
+        }
+      ],
+      "videoUrl": "https://www.youtube.com/watch?v=RQisbGGUzPE&t=167s&pp=ygUQam9sbG9mIHR1dG9yaWFscw%3D%3D"
     },
     {
       "id": "red-red",
@@ -100,7 +327,52 @@
       "allergens": [],
       "imageUrl": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=200&h=200&fit=crop",
       "isNew": false,
-      "isTrending": true
+      "isTrending": true,
+      "ingredients": [
+        {
+          "name": "Black-eyed Peas",
+          "amount": 1,
+          "unit": "cup"
+        },
+        {
+          "name": "Ripe Plantains",
+          "amount": 2,
+          "unit": ""
+        },
+        {
+          "name": "Palm Oil",
+          "amount": 0.5,
+          "unit": "cup"
+        },
+        {
+          "name": "Gari",
+          "amount": 0.5,
+          "unit": "cup"
+        }
+      ],
+      "instructions": [
+        {
+          "step": 1,
+          "text": "Wash and soak black-eyed peas for 30 minutes, then drain"
+        },
+        {
+          "step": 2,
+          "text": "Peel and slice ripe plantains"
+        },
+        {
+          "step": 3,
+          "text": "Heat palm oil in a large pot and fry the black-eyed peas until reduced and fragrant"
+        },
+        {
+          "step": 4,
+          "text": "Add plantains and stir well to combine"
+        },
+        {
+          "step": 5,
+          "text": "Add water, cover, and cook on low heat until plantains are tender"
+        }
+      ],
+      "videoUrl": "https://www.youtube.com/watch?v=RQisbGGUzPE&t=167s&pp=ygUQam9sbG9mIHR1dG9yaWFscw%3D%3D"
     },
     {
       "id": "tuo-zaafi",
@@ -117,7 +389,43 @@
       "allergens": ["Fish"],
       "imageUrl": "https://images.unsplash.com/photo-1551183053-bf91a1d81141?q=80&w=200&h=200&fit=crop",
       "isNew": true,
-      "isTrending": false
+      "isTrending": false,
+      "ingredients": [
+        {
+          "name": "Corn Flour",
+          "amount": 1,
+          "unit": "cup"
+        },
+        {
+          "name": "Ayoyo Soup",
+          "amount": 1,
+          "unit": "cup"
+        },
+        {
+          "name": "Dried Fish",
+          "amount": 0.5,
+          "unit": "ounce"
+        }
+      ],
+      "instructions": [
+        {
+          "step": 1,
+          "text": "Mix corn flour with water to form a dough"
+        },
+        {
+          "step": 2,
+          "text": "Knead the dough until smooth"
+        },
+        {
+          "step": 3,
+          "text": "Cook the dough in a pot of water until tender"
+        },
+        {
+          "step": 4,
+          "text": "Serve with ayoyo soup and dried fish"
+        }
+      ],
+      "videoUrl": "https://www.youtube.com/watch?v=RQisbGGUzPE&t=167s&pp=ygUQam9sbG9mIHR1dG9yaWFscw%3D%3D"
     },
     {
       "id": "kelewele",
@@ -134,7 +442,49 @@
       "allergens": [],
       "imageUrl": "https://images.unsplash.com/photo-1543352634-a1c51d9f1fa7?q=80&w=200&h=200&fit=crop",
       "isNew": false,
-      "isTrending": true
+      "isTrending": true,
+      "ingredients": [
+        {
+          "name": "Plantains",
+          "amount": 4,
+          "unit": ""
+        },
+        {
+          "name": "Ginger",
+          "amount": 1,
+          "unit": "thumb"
+        },
+        {
+          "name": "Garlic",
+          "amount": 3,
+          "unit": "cloves"
+        },
+        {
+          "name": "African Spices",
+          "amount": 1,
+          "unit": "teaspoon"
+        },
+        {
+          "name": "Vegetable Oil",
+          "amount": 0.5,
+          "unit": "cup"
+        }
+      ],
+      "instructions": [
+        {
+          "step": 1,
+          "text": "Peel and slice plantains"
+        },
+        {
+          "step": 2,
+          "text": "Mix ginger, garlic, and African spices with vegetable oil"
+        },
+        {
+          "step": 3,
+          "text": "Fry plantains in the mixture until golden and tender"
+        }
+      ],
+      "videoUrl": "https://www.youtube.com/watch?v=RQisbGGUzPE&t=167s&pp=ygUQam9sbG9mIHR1dG9yaWFscw%3D%3D"
     },
     {
       "id": "kontomire-stew",
@@ -151,7 +501,52 @@
       "allergens": [],
       "imageUrl": "https://images.unsplash.com/photo-1547592180-85f173990554?q=80&w=200&h=200&fit=crop",
       "isNew": true,
-      "isTrending": true
+      "isTrending": true,
+      "ingredients": [
+        {
+          "name": "Cocoyam Leaves",
+          "amount": 1,
+          "unit": "cup"
+        },
+        {
+          "name": "Smoked Fish",
+          "amount": 0.5,
+          "unit": "cup"
+        },
+        {
+          "name": "Meats",
+          "amount": 0.5,
+          "unit": "pound"
+        },
+        {
+          "name": "Boiled Yams",
+          "amount": 2,
+          "unit": ""
+        }
+      ],
+      "instructions": [
+        {
+          "step": 1,
+          "text": "Wash and soak cocoyam leaves for 30 minutes, then drain"
+        },
+        {
+          "step": 2,
+          "text": "Cook cocoyam leaves in a pot of water until tender"
+        },
+        {
+          "step": 3,
+          "text": "Add smoked fish and meats"
+        },
+        {
+          "step": 4,
+          "text": "Cook until the meats are tender"
+        },
+        {
+          "step": 5,
+          "text": "Serve with boiled yams"
+        }
+      ],
+      "videoUrl": "https://www.youtube.com/watch?v=RQisbGGUzPE&t=167s&pp=ygUQam9sbG9mIHR1dG9yaWFscw%3D%3D"
     },
     {
       "id": "yam-palaver",
@@ -168,7 +563,61 @@
       "allergens": [],
       "imageUrl": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?q=80&w=200&h=200&fit=crop",
       "isNew": false,
-      "isTrending": false
+      "isTrending": false,
+      "ingredients": [
+        {
+          "name": "Yam",
+          "amount": 2,
+          "unit": ""
+        },
+        {
+          "name": "Spinach",
+          "amount": 1,
+          "unit": "pound"
+        },
+        {
+          "name": "Fish",
+          "amount": 0.5,
+          "unit": "pound"
+        },
+        {
+          "name": "Meat",
+          "amount": 0.5,
+          "unit": "pound"
+        },
+        {
+          "name": "Egusi",
+          "amount": 0.5,
+          "unit": "cup"
+        }
+      ],
+      "instructions": [
+        {
+          "step": 1,
+          "text": "Wash and soak yam for 30 minutes, then drain"
+        },
+        {
+          "step": 2,
+          "text": "Cook yam in a pot of water until tender"
+        },
+        {
+          "step": 3,
+          "text": "Cook spinach in a separate pot"
+        },
+        {
+          "step": 4,
+          "text": "Cook fish and meat in a separate pot"
+        },
+        {
+          "step": 5,
+          "text": "Mix the cooked yam, spinach, fish, meat, and egusi"
+        },
+        {
+          "step": 6,
+          "text": "Cook until the mixture is heated through"
+        }
+      ],
+      "videoUrl": "https://www.youtube.com/watch?v=RQisbGGUzPE&t=167s&pp=ygUQam9sbG9mIHR1dG9yaWFscw%3D%3D"
     },
     {
       "id": "mpotompoto",
@@ -185,7 +634,52 @@
       "allergens": [],
       "imageUrl": "https://images.unsplash.com/photo-1548280684-c91e7205b05f?q=80&w=200&h=200&fit=crop",
       "isNew": true,
-      "isTrending": false
+      "isTrending": false,
+      "ingredients": [
+        {
+          "name": "Yam",
+          "amount": 2,
+          "unit": ""
+        },
+        {
+          "name": "Palm Oil",
+          "amount": 0.5,
+          "unit": "cup"
+        },
+        {
+          "name": "Tomatoes",
+          "amount": 4,
+          "unit": "medium"
+        },
+        {
+          "name": "Smoked Fish",
+          "amount": 0.5,
+          "unit": "cup"
+        }
+      ],
+      "instructions": [
+        {
+          "step": 1,
+          "text": "Wash and soak yam for 30 minutes, then drain"
+        },
+        {
+          "step": 2,
+          "text": "Cook yam in a pot of water until tender"
+        },
+        {
+          "step": 3,
+          "text": "Cook tomatoes in a separate pot"
+        },
+        {
+          "step": 4,
+          "text": "Mix the cooked yam, tomatoes, palm oil, and smoked fish"
+        },
+        {
+          "step": 5,
+          "text": "Cook until the mixture is heated through"
+        }
+      ],
+      "videoUrl": "https://www.youtube.com/watch?v=RQisbGGUzPE&t=167s&pp=ygUQam9sbG9mIHR1dG9yaWFscw%3D%3D"
     },
     {
       "id": "gari-soakings",
@@ -202,7 +696,52 @@
       "allergens": ["Peanuts"],
       "imageUrl": "https://images.unsplash.com/photo-1528207776546-365bb710ee93?q=80&w=200&h=200&fit=crop",
       "isNew": false,
-      "isTrending": false
+      "isTrending": false,
+      "ingredients": [
+        {
+          "name": "Gari",
+          "amount": 0.5,
+          "unit": "cup"
+        },
+        {
+          "name": "Groundnuts",
+          "amount": 0.5,
+          "unit": "cup"
+        },
+        {
+          "name": "Sugar",
+          "amount": 0.25,
+          "unit": "cup"
+        },
+        {
+          "name": "Peanuts",
+          "amount": 0.5,
+          "unit": "cup"
+        }
+      ],
+      "instructions": [
+        {
+          "step": 1,
+          "text": "Mix gari, groundnuts, and sugar"
+        },
+        {
+          "step": 2,
+          "text": "Add peanuts"
+        },
+        {
+          "step": 3,
+          "text": "Soak the mixture in cold water for 30 minutes"
+        },
+        {
+          "step": 4,
+          "text": "Drain the water"
+        },
+        {
+          "step": 5,
+          "text": "Serve"
+        }
+      ],
+      "videoUrl": "https://www.youtube.com/watch?v=RQisbGGUzPE&t=167s&pp=ygUQam9sbG9mIHR1dG9yaWFscw%3D%3D"
     },
     {
       "id": "fante-fante",
@@ -219,7 +758,48 @@
       "allergens": [],
       "imageUrl": "https://images.unsplash.com/photo-1548943487-a2e4e43b4853?q=80&w=200&h=200&fit=crop",
       "isNew": true,
-      "isTrending": true
+      "isTrending": true,
+      "ingredients": [
+        {
+          "name": "Fish",
+          "amount": 0.5,
+          "unit": "pound"
+        },
+        {
+          "name": "Vegetables",
+          "amount": 1,
+          "unit": "cup"
+        },
+        {
+          "name": "Herbs",
+          "amount": 0.5,
+          "unit": "cup"
+        },
+        {
+          "name": "Boiled Green Plantains",
+          "amount": 2,
+          "unit": ""
+        }
+      ],
+      "instructions": [
+        {
+          "step": 1,
+          "text": "Cook fish in a separate pot"
+        },
+        {
+          "step": 2,
+          "text": "Cook vegetables and herbs in a separate pot"
+        },
+        {
+          "step": 3,
+          "text": "Mix the cooked fish and vegetables"
+        },
+        {
+          "step": 4,
+          "text": "Serve with boiled green plantains"
+        }
+      ],
+      "videoUrl": "https://www.youtube.com/watch?v=RQisbGGUzPE&t=167s&pp=ygUQam9sbG9mIHR1dG9yaWFscw%3D%3D"
     },
     {
       "id": "koko-breakfast",
@@ -236,7 +816,39 @@
       "allergens": ["Peanuts"],
       "imageUrl": "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=200&h=200&fit=crop",
       "isNew": false,
-      "isTrending": true
+      "isTrending": true,
+      "ingredients": [
+        {
+          "name": "Millet",
+          "amount": 1,
+          "unit": "cup"
+        },
+        {
+          "name": "Boiled Bean Cake",
+          "amount": 1,
+          "unit": ""
+        },
+        {
+          "name": "Peanuts",
+          "amount": 0.5,
+          "unit": "cup"
+        }
+      ],
+      "instructions": [
+        {
+          "step": 1,
+          "text": "Wash and soak millet for 30 minutes, then drain"
+        },
+        {
+          "step": 2,
+          "text": "Cook millet in a pot of water until tender"
+        },
+        {
+          "step": 3,
+          "text": "Serve with boiled bean cake and peanuts"
+        }
+      ],
+      "videoUrl": "https://www.youtube.com/watch?v=RQisbGGUzPE&t=167s&pp=ygUQam9sbG9mIHR1dG9yaWFscw%3D%3D"
     }
   ]
 }
