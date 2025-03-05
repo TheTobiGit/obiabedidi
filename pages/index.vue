@@ -29,9 +29,10 @@
             ref="textareaRef"
             v-model="searchInput"
             rows="1"
-            placeholder="What do you want to cook?"
+            placeholder="Enter a recipe name or ingredients you have (e.g., 'jollof rice' or 'corn, tilapia')"
             class="w-full px-6 pt-4 pb-14 rounded-2xl resize-none border-0 outline-none transition-all duration-200 max-h-[300px] overflow-y-auto bg-surface text-primary placeholder-muted focus:ring-2 focus:ring-muted"
             @input="adjustTextareaHeight"
+            @keydown.enter.prevent="handleSearch"
           />
           
           <!-- Bottom Action Bar -->
@@ -58,7 +59,10 @@
             </div>
 
             <!-- Right Side Submit -->
-            <button class="p-2 rounded-xl transition-colors text-muted hover:bg-surface-hover">
+            <button 
+              @click="handleSearch"
+              class="p-2 rounded-xl transition-colors text-muted hover:bg-surface-hover"
+            >
               <Icon name="material-symbols:arrow-upward" class="w-5 h-5" />
             </button>
           </div>
@@ -87,6 +91,7 @@ const isAIEnabled = ref(false)
 const colorMode = useColorMode()
 const textareaRef = ref<HTMLTextAreaElement | null>(null)
 const searchInput = ref('')
+const router = useRouter()
 
 // Update meta theme-color when colorMode changes
 useHead(() => ({
@@ -111,6 +116,16 @@ function adjustTextareaHeight() {
   if (!textarea) return
   textarea.style.height = 'auto'
   textarea.style.height = `${Math.min(textarea.scrollHeight, 300)}px`
+}
+
+function handleSearch() {
+  if (!searchInput.value.trim()) return
+  
+  // Navigate to search page with query
+  router.push({
+    path: '/search',
+    query: { q: searchInput.value }
+  })
 }
 
 onMounted(() => {
