@@ -29,14 +29,14 @@
             ref="textareaRef"
             v-model="searchInput"
             rows="1"
-            placeholder="Enter a recipe name or ingredients you have (e.g., 'jollof rice' or 'corn, tilapia')"
-            class="w-full px-6 pt-4 pb-14 rounded-2xl resize-none border-0 outline-none transition-all duration-200 max-h-[300px] overflow-y-auto bg-surface text-primary placeholder-muted focus:ring-2 focus:ring-muted"
+            placeholder="Search by recipe name or ingredients..."
+            class="w-full px-4 pt-3 pb-12 rounded-2xl resize-none border-0 outline-none transition-all duration-200 max-h-[300px] overflow-y-auto bg-surface text-primary placeholder-muted focus:ring-2 focus:ring-muted"
             @input="adjustTextareaHeight"
             @keydown.enter.prevent="handleSearch"
           />
           
           <!-- Bottom Action Bar -->
-          <div class="absolute bottom-3 left-0 right-0 px-6 flex items-center justify-between">
+          <div class="absolute bottom-2 left-0 right-0 px-4 flex items-center justify-between">
             <!-- Left Side Actions -->
             <div class="flex items-center gap-2">
               <!-- AI Toggle Button -->
@@ -47,7 +47,7 @@
                     ? 'bg-green-500/20 text-green-500 hover:bg-green-500/30' 
                     : 'text-muted hover:bg-surface-hover'
                 ]"
-                class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-sm transition-all duration-200"
+                class="flex items-center gap-1.5 px-2 py-1 rounded-xl text-sm transition-all duration-200"
               >
                 <Icon 
                   name="material-symbols:robot" 
@@ -61,7 +61,7 @@
             <!-- Right Side Submit -->
             <button 
               @click="handleSearch"
-              class="p-2 rounded-xl transition-colors text-muted hover:bg-surface-hover"
+              class="p-1.5 rounded-xl transition-colors text-muted hover:bg-surface-hover"
             >
               <Icon name="material-symbols:arrow-upward" class="w-5 h-5" />
             </button>
@@ -103,6 +103,25 @@ useHead(() => ({
   ]
 }))
 
+// Common words to filter out from search
+const commonWords = [
+  'i', 'want', 'need', 'looking', 'for', 'to', 'cook', 'make', 'a', 'an', 'the',
+  'some', 'recipe', 'recipes', 'food', 'dish', 'meal', 'with', 'and', 'or', 'please',
+  'help', 'me', 'find', 'show', 'give', 'how', 'can', 'would', 'like', 'about'
+]
+
+function cleanSearchQuery(query: string): string[] {
+  // Split by common delimiters and clean
+  const words = query.toLowerCase()
+    .replace(/[,.?!]/g, ' ')
+    .split(/\s+/)
+    .map(word => word.trim())
+    .filter(word => word.length > 0)
+    
+  // Filter out common words
+  return words.filter(word => !commonWords.includes(word))
+}
+
 function toggleAI() {
   isAIEnabled.value = !isAIEnabled.value
 }
@@ -121,10 +140,13 @@ function adjustTextareaHeight() {
 function handleSearch() {
   if (!searchInput.value.trim()) return
   
+  // Clean the search query
+  const searchTerms = cleanSearchQuery(searchInput.value)
+  
   // Navigate to search page with query
   router.push({
     path: '/search',
-    query: { q: searchInput.value }
+    query: { q: searchTerms.length > 0 ? searchTerms.join(' ') : searchInput.value.trim() }
   })
 }
 
