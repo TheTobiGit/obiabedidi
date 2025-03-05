@@ -1,38 +1,119 @@
 <template>
-  <div class="flex flex-col min-h-dvh gap-5">
-    <section class="flex flex-col gap-5 p-4">
-      <!-- Header -->
-      <div>
-        <img src="/assets/logo.svg" alt="logo" class="h-13" />
+  <div class="min-h-dvh flex flex-col transition-colors duration-200 relative">
+    <!-- Top Bar -->
+    <div class="flex justify-between items-center px-4 py-4">
+      <!-- Logo -->
+      <div class="flex items-center gap-1">
+        <Logo class="h-8 w-auto" />
+        <span class="text-xl font-semibold tracking-tighter transition-colors -ml-1 text-primary">
+          Obiabedidi
+        </span>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="flex-1 flex flex-col items-center justify-center px-4">
+      <div class="w-full max-w-2xl text-center mb-8">
+        <h1 class="text-2xl mb-2 transition-colors text-primary">
+          Good evening, Chef.
+        </h1>
+        <p class="text-lg transition-colors text-secondary">
+          What would you like to cook today?
+        </p>
       </div>
 
-      <!-- Tip of the day -->
-      <div class="flex justify-center items-center gap-1 text-sm">
-        <Icon name="material-symbols:tips-and-updates" />
-        <p>wash your hands before and after cooking</p>
-      </div>
+      <div class="w-full max-w-2xl">
+        <!-- Search Container -->
+        <div class="relative mb-4">
+          <textarea
+            ref="textareaRef"
+            v-model="searchInput"
+            rows="1"
+            placeholder="What do you want to cook?"
+            class="w-full px-6 pt-4 pb-14 rounded-2xl resize-none border-0 outline-none transition-all duration-200 max-h-[300px] overflow-y-auto bg-surface text-primary placeholder-muted focus:ring-2 focus:ring-muted"
+            @input="adjustTextareaHeight"
+          />
+          
+          <!-- Bottom Action Bar -->
+          <div class="absolute bottom-3 left-0 right-0 px-6 flex items-center justify-between">
+            <!-- Left Side Actions -->
+            <div class="flex items-center gap-2">
+              <!-- AI Toggle Button -->
+              <button 
+                @click="toggleAI"
+                :class="[
+                  isAIEnabled 
+                    ? 'bg-green-500/20 text-green-500 hover:bg-green-500/30' 
+                    : 'text-muted hover:bg-surface-hover'
+                ]"
+                class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-sm transition-all duration-200"
+              >
+                <Icon 
+                  name="material-symbols:robot" 
+                  class="w-4 h-4 transition-transform"
+                  :class="{ 'scale-110': isAIEnabled }"
+                />
+                <span class="text-xs">AI {{ isAIEnabled ? 'ON' : 'OFF' }}</span>
+              </button>
+            </div>
 
-      <!-- Recipe Cards Container -->
-      <div class="flex flex-col gap-4 w-full">
-        <RecipeCard
-          v-for="recipe in recipes"
-          :key="recipe.id"
-          v-bind="recipe"
-        />
-      </div>
-    </section>
+            <!-- Right Side Submit -->
+            <button class="p-2 rounded-xl transition-colors text-muted hover:bg-surface-hover">
+              <Icon name="material-symbols:arrow-upward" class="w-5 h-5" />
+            </button>
+          </div>
+        </div>
 
-    <!-- Floating Menu -->
-    <FloatingMenu />
+        <!-- Browse Button -->
+        <button 
+          @click="showAll"
+          class="w-full flex items-center justify-center gap-2 px-6 py-4 rounded-2xl text-sm font-medium transition-all duration-200 bg-surface text-primary hover:bg-surface-hover"
+        >
+          <Icon name="material-symbols:view-list" class="w-5 h-5" />
+          <span>Browse recipes</span>
+        </button>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-4 text-center text-sm transition-colors text-muted">
+      <p>Find your next favorite Ghanaian recipe</p>
+    </footer>
   </div>
 </template>
 
 <script setup lang="ts">
-import type { Recipe } from "~/types/recipe";
-import recipesData from "~/data/recipes.json";
+const isAIEnabled = ref(false)
+const colorMode = useColorMode()
+const textareaRef = ref<HTMLTextAreaElement | null>(null)
+const searchInput = ref('')
 
-// Type assertion for the imported JSON data
-const recipes = recipesData.recipes as Recipe[];
+// Update meta theme-color when colorMode changes
+useHead(() => ({
+  meta: [
+    {
+      name: 'theme-color',
+      content: colorMode.value === 'dark' ? '#1C1C1E' : '#F9FAFB'
+    }
+  ]
+}))
+
+function toggleAI() {
+  isAIEnabled.value = !isAIEnabled.value
+}
+
+function showAll() {
+  navigateTo('/browse')
+}
+
+function adjustTextareaHeight() {
+  const textarea = textareaRef.value
+  if (!textarea) return
+  textarea.style.height = 'auto'
+  textarea.style.height = `${Math.min(textarea.scrollHeight, 300)}px`
+}
+
+onMounted(() => {
+  adjustTextareaHeight()
+})
 </script>
-
-<style></style>

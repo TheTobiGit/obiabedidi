@@ -5,11 +5,34 @@
   /* Ensure the page takes up full viewport height including notch */
   height: 100vh;
   height: 100dvh; /* Dynamic viewport height for mobile browsers */
+
+  /* Set Plus Jakarta Sans as the display font */
+  --font-display: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+
+  /* Theme variables - Light theme by default */
+  --color-primary: #111827; /* gray-900 */
+  --color-secondary: #4B5563; /* gray-600 */
+  --color-muted: #9CA3AF; /* gray-400 */
+  --color-surface: #FFFFFF;
+  --color-surface-hover: #F9FAFB; /* gray-50 */
+  --color-border: #E5E7EB; /* gray-200 */
+  --color-bg: #F9FAFB; /* gray-50 */
+}
+
+/* Dark theme */
+[data-theme='dark'] {
+  --color-primary: #FFFFFF;
+  --color-secondary: #9CA3AF; /* gray-400 */
+  --color-muted: #6B7280; /* gray-500 */
+  --color-surface: #2C2C2E;
+  --color-surface-hover: #374151; /* gray-700 */
+  --color-border: transparent;
+  --color-bg: #1C1C1E;
 }
 
 /* Body styles with notch area handling */
 body {
-  background-color: #f8f9fa;
+  background-color: var(--color-bg);
   min-height: 100vh;
   min-height: 100dvh;
   /* Add padding for notch areas */
@@ -17,4 +40,35 @@ body {
   /* Ensure content is properly positioned */
   position: relative;
   width: 100%;
+  font-family: var(--font-display);
+  color: var(--color-primary);
+}
+
+/* Utility classes */
+.text-primary {
+  color: var(--color-primary);
+}
+.text-secondary {
+  color: var(--color-secondary);
+}
+.text-muted {
+  color: var(--color-muted);
+}
+.bg-surface {
+  background-color: var(--color-surface);
+}
+.bg-surface-hover {
+  background-color: var(--color-surface-hover);
+}
+.border-theme {
+  border-color: var(--color-border);
+}
+
+/* Custom scrollbar for textarea */
+textarea::-webkit-scrollbar {
+  display: none;
+}
+textarea {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
