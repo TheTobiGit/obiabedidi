@@ -4,7 +4,7 @@
 */
 
 import { useFirebaseAuth } from 'vuefire'
-import { GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth'
+import { GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from 'firebase/auth'
 import type { User } from 'firebase/auth'
 
 export function useAuth() {
@@ -12,11 +12,25 @@ export function useAuth() {
   const auth = useFirebaseAuth()
   
   // Reactive refs
+  const isAuthReady = ref(false)
   const isAuthenticated = computed(() => !!auth?.currentUser)
   const user = computed(() => auth?.currentUser as User | null)
   const isLoading = ref(false)
   const error = ref('')
   
+  // Initialize auth state
+  onMounted(() => {
+    if (!auth) return
+
+    // Listen for auth state changes
+    const unsubscribe = onAuthStateChanged(auth, () => {
+      isAuthReady.value = true
+    })
+
+    // Cleanup listener on unmount
+    onUnmounted(() => unsubscribe())
+  })
+
   // User display info
   const userInitial = computed(() => {
     if (!user.value?.displayName) return '?'
@@ -95,9 +109,8 @@ export function useAuth() {
       isLoading.value = true
       
       await signOut(auth)
-      // Reload the page to ensure the user is logged out
-      window.location.reload()
-      
+      // Redirect to home
+      navigateTo('/')
     } catch (e) {
       error.value = 'Failed to sign out. Please try again'
       console.error('Logout error:', e)
@@ -108,6 +121,7 @@ export function useAuth() {
   }
 
   return {
+    isAuthReady,
     isAuthenticated,
     user,
     userInitial,

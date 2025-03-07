@@ -11,7 +11,7 @@
       </div>
 
       <!-- Auth Button -->
-      <div class="relative" ref="profileDropdown">
+      <div v-if="isAuthReady" class="relative" ref="profileDropdown">
         <!-- Login Button -->
         <button 
           v-if="!isAuthenticated"
@@ -94,13 +94,17 @@
           </div>
         </div>
       </div>
+      <div v-else class="w-[72px] h-[36px] rounded-xl bg-surface/50 animate-pulse"></div>
     </div>
 
     <!-- Main Content -->
     <main class="flex-1 flex flex-col items-center justify-center px-4">
       <div class="w-full max-w-2xl text-center mb-8">
         <h1 class="text-2xl mb-2 transition-colors text-primary">
-          {{ greeting }}, {{ isAuthenticated ? firstName : 'Chef' }}.
+          <template v-if="isAuthReady">
+            {{ greeting }}, {{ isAuthenticated ? firstName : 'Chef' }}.
+          </template>
+          <div v-else class="h-[36px] bg-surface/50 rounded-xl w-64 mx-auto animate-pulse"></div>
         </h1>
         <p class="text-lg transition-colors text-secondary">
           What would you like to cook today?
@@ -175,6 +179,7 @@
 import { useAuth } from '~/composables/useAuth'
 
 const { 
+  isAuthReady,
   isAuthenticated, 
   user, 
   userInitial, 
