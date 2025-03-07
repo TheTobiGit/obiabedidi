@@ -245,10 +245,18 @@
         </div>
       </div>
     </main>
+
+    <!-- Speed Dial (only for authenticated users) -->
+    <SpeedDial v-if="isAuthReady && isAuthenticated" />
   </div>
 </template>
 
 <script setup lang="ts">
+const { 
+  isAuthReady,
+  isAuthenticated, 
+} = useAuth()
+
 const router = useRouter()
 const colorMode = useColorMode()
 

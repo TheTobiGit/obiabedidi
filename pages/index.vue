@@ -172,12 +172,13 @@
     <footer class="py-4 text-center text-sm transition-colors text-muted">
       <p>Find your next favorite Ghanaian recipe</p>
     </footer>
+
+    <!-- Speed Dial (only for authenticated users) -->
+    <SpeedDial v-if="isAuthReady && isAuthenticated" />
   </div>
 </template>
 
 <script setup lang="ts">
-import { useAuth } from '~/composables/useAuth'
-
 const { 
   isAuthReady,
   isAuthenticated, 
