@@ -49,7 +49,7 @@
                   v-for="recipe in message.results" 
                   :key="recipe.id"
                   class="flex gap-3 p-3 rounded-xl border border-theme hover:bg-surface-hover transition-all cursor-pointer"
-                  @click="router.push(`/${recipe.id}`)"
+                  @click="router.push(`/recipes/${recipe.id}`)"
                 >
                   <!-- Recipe Image -->
                   <img 

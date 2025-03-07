@@ -197,7 +197,7 @@
               v-for="recipe in filteredRecipes" 
               :key="recipe.id"
               class="p-4 rounded-2xl transition-all duration-200 bg-surface hover:bg-surface-hover border-theme cursor-pointer"
-              @click="router.push(`/${recipe.id}`)"
+              @click="router.push(`/recipes/${recipe.id}`)"
             >
               <div class="flex items-start gap-4">
                 <!-- Recipe Image -->
@@ -245,10 +245,18 @@
         </div>
       </div>
     </main>
+
+    <!-- Speed Dial (only for authenticated users) -->
+    <SpeedDial v-if="isAuthReady && isAuthenticated" />
   </div>
 </template>
 
 <script setup lang="ts">
+const { 
+  isAuthReady,
+  isAuthenticated, 
+} = useAuth()
+
 const router = useRouter()
 const colorMode = useColorMode()
 

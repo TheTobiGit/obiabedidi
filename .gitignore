@@ -28,3 +28,6 @@ logs
 .cursorrules
 .project-helper
 .cussorrules
+
+# Firebase
+service-account.json

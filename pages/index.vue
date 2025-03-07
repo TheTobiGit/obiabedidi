@@ -9,13 +9,102 @@
           Obiabedidi
         </span>
       </div>
+
+      <!-- Auth Button -->
+      <div v-if="isAuthReady" class="relative" ref="profileDropdown">
+        <!-- Login Button -->
+        <button 
+          v-if="!isAuthenticated"
+          @click="navigateTo('/auth/login')"
+          class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-sm font-medium transition-all duration-200 bg-surface text-primary hover:bg-surface-hover"
+        >
+          <Icon name="material-symbols:login" class="w-5 h-5" />
+          <span>Login</span>
+        </button>
+
+        <!-- Profile Button -->
+        <button
+          v-else
+          @click="isProfileOpen = !isProfileOpen"
+          class="flex items-center gap-1.5 px-1.5 py-1.5 rounded-xl text-sm font-medium transition-all duration-200 bg-surface hover:bg-surface-hover"
+        >
+          <!-- User Photo or Initial -->
+          <div v-if="userPhotoURL" class="w-5 h-5 rounded-full overflow-hidden">
+            <img 
+              :src="userPhotoURL" 
+              :alt="user?.displayName || 'User'"
+              class="w-full h-full object-cover"
+            />
+          </div>
+          <div 
+            v-else 
+            class="w-5 h-5 rounded-full bg-primary text-white flex items-center justify-center text-xs font-medium"
+          >
+            {{ userInitial }}
+          </div>
+
+          <!-- Dropdown Arrow -->
+          <Icon 
+            name="material-symbols:arrow-drop-down"
+            class="w-5 h-5 text-muted transition-transform"
+            :class="{ 'rotate-180': isProfileOpen }"
+          />
+        </button>
+
+        <!-- Profile Dropdown -->
+        <div
+          v-if="isProfileOpen"
+          class="absolute right-0 top-full mt-2 w-48 py-2 rounded-xl bg-surface border border-theme shadow-lg"
+        >
+          <!-- User Info -->
+          <div class="px-4 py-2 border-b border-theme">
+            <div class="font-medium text-primary truncate">
+              {{ user?.displayName }}
+            </div>
+            <div class="text-xs text-muted truncate">
+              {{ user?.email }}
+            </div>
+          </div>
+
+          <!-- Menu Items -->
+          <div class="py-1">
+            <button
+              @click="navigateTo('/profile')"
+              class="w-full flex items-center gap-2 px-4 py-2 text-sm text-primary hover:bg-surface-hover transition-colors"
+            >
+              <Icon name="material-symbols:person" class="w-5 h-5" />
+              <span>Profile</span>
+            </button>
+
+            <button
+              @click="navigateTo('/saved-recipes')"
+              class="w-full flex items-center gap-2 px-4 py-2 text-sm text-primary hover:bg-surface-hover transition-colors"
+            >
+              <Icon name="material-symbols:bookmark" class="w-5 h-5" />
+              <span>Saved Recipes</span>
+            </button>
+
+            <button
+              @click="logout"
+              class="w-full flex items-center gap-2 px-4 py-2 text-sm text-red-500 hover:bg-surface-hover transition-colors"
+            >
+              <Icon name="material-symbols:logout" class="w-5 h-5" />
+              <span>Logout</span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div v-else class="w-[72px] h-[36px] rounded-xl bg-surface/50 animate-pulse"></div>
     </div>
 
     <!-- Main Content -->
     <main class="flex-1 flex flex-col items-center justify-center px-4">
       <div class="w-full max-w-2xl text-center mb-8">
         <h1 class="text-2xl mb-2 transition-colors text-primary">
-          Good evening, Chef.
+          <template v-if="isAuthReady">
+            {{ greeting }}, {{ isAuthenticated ? firstName : 'Chef' }}.
+          </template>
+          <div v-else class="h-[36px] bg-surface/50 rounded-xl w-64 mx-auto animate-pulse"></div>
         </h1>
         <p class="text-lg transition-colors text-secondary">
           What would you like to cook today?
@@ -83,15 +172,38 @@
     <footer class="py-4 text-center text-sm transition-colors text-muted">
       <p>Find your next favorite Ghanaian recipe</p>
     </footer>
+
+    <!-- Speed Dial (only for authenticated users) -->
+    <SpeedDial v-if="isAuthReady && isAuthenticated" />
   </div>
 </template>
 
 <script setup lang="ts">
+const { 
+  isAuthReady,
+  isAuthenticated, 
+  user, 
+  userInitial, 
+  userPhotoURL, 
+  firstName,
+  greeting,
+  logout 
+} = useAuth()
+
 const isAIEnabled = ref(false)
 const colorMode = useColorMode()
 const textareaRef = ref<HTMLTextAreaElement | null>(null)
 const searchInput = ref('')
 const router = useRouter()
+
+// Profile dropdown state
+const isProfileOpen = ref(false)
+const profileDropdown = ref<HTMLElement | null>(null)
+
+// Close dropdown when clicking outside
+onClickOutside(profileDropdown, () => {
+  isProfileOpen.value = false
+})
 
 // Update meta theme-color when colorMode changes
 useHead(() => ({
