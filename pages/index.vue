@@ -9,6 +9,15 @@
           Obiabedidi
         </span>
       </div>
+
+      <!-- Login Button -->
+      <button 
+        @click="navigateTo('/auth/login')"
+        class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-sm font-medium transition-all duration-200 bg-surface text-primary hover:bg-surface-hover"
+      >
+        <Icon name="material-symbols:login" class="w-5 h-5" />
+        <span>Login</span>
+      </button>
     </div>
 
     <!-- Main Content -->
