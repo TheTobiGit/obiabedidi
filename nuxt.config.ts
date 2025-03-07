@@ -23,17 +23,17 @@ export default defineNuxtConfig({
       enabled: true
     },
     config: {
-      apiKey: "AIzaSyCLdCx-nlU_u-SbZU6uw-dRVR7PGdUw9u4",
-      authDomain: "obiabedidi-app.firebaseapp.com",
-      projectId: "obiabedidi-app",
-      storageBucket: "obiabedidi-app.firebasestorage.app",
-      messagingSenderId: "426559370936",
-      appId: "1:426559370936:web:202c04c732fe239a8ae64d",
-      measurementId: "G-QKGRLTF111"
+      apiKey: process.env.apiKey,
+      authDomain: process.env.authDomain,
+      projectId: process.env.projectId,
+      storageBucket: process.env.storageBucket,
+      messagingSenderId: process.env.messagingSenderId,
+      appId: process.env.appId,
+      measurementId: process.env.measurementId
     }
   },
 
-  // ssr: false,
+  ssr: false,
   
   // Color mode configuration
   colorMode: {
