@@ -25,6 +25,7 @@
   },
   "devDependencies": {
     "@nuxtjs/color-mode": "^3.5.2",
-    "@nuxtjs/google-fonts": "^3.2.0"
+    "@nuxtjs/google-fonts": "^3.2.0",
+    "nuxt-vuefire": "^1.0.5"
   }
 }

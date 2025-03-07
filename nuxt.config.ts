@@ -9,13 +9,31 @@ export default defineNuxtConfig({
     plugins: [tailwindcss()],
   },
   modules: [
-    '@pinia/nuxt', 
-    '@vueuse/nuxt', 
-    '@nuxt/icon', 
-    '@nuxt/image', 
+    '@pinia/nuxt',
+    '@vueuse/nuxt',
+    '@nuxt/icon',
+    '@nuxt/image',
     '@nuxtjs/color-mode',
-    '@nuxtjs/google-fonts'
+    '@nuxtjs/google-fonts',
+    'nuxt-vuefire'
   ],
+
+  vuefire: {
+    auth: {
+      enabled: true
+    },
+    config: {
+      apiKey: "AIzaSyCLdCx-nlU_u-SbZU6uw-dRVR7PGdUw9u4",
+      authDomain: "obiabedidi-app.firebaseapp.com",
+      projectId: "obiabedidi-app",
+      storageBucket: "obiabedidi-app.firebasestorage.app",
+      messagingSenderId: "426559370936",
+      appId: "1:426559370936:web:202c04c732fe239a8ae64d",
+      measurementId: "G-QKGRLTF111"
+    }
+  },
+
+  ssr: false,
   
   // Color mode configuration
   colorMode: {

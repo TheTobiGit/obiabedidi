@@ -1,6 +1,6 @@
 <!--
   File: pages/auth/login.vue
-  Simple Google authentication login page
+  Simple Google authentication login page using VueFire
 -->
 <template>
   <div class="min-h-dvh flex flex-col transition-colors duration-200">
@@ -29,9 +29,14 @@
           </p>
         </div>
 
+        <!-- Error Message -->
+        <div v-if="error" class="mb-6 p-4 rounded-xl bg-red-500/10 text-red-500 text-sm">
+          {{ error }}
+        </div>
+
         <!-- Google Login Button -->
         <button
-          @click="handleGoogleLogin"
+          @click="loginWithGoogle"
           :disabled="isLoading"
           class="w-full flex items-center justify-center gap-3 px-6 py-3 rounded-xl bg-surface border-theme hover:bg-surface-hover transition-all disabled:opacity-50 disabled:cursor-not-allowed"
         >
@@ -63,27 +68,21 @@
 </template>
 
 <script setup lang="ts">
+import { useAuth } from '~/composables/useAuth'
+
 // Router
 const router = useRouter()
 
-// Loading state
-const isLoading = ref(false)
+// Auth state
+const { isLoading, error, loginWithGoogle } = useAuth()
 
-// Google login
-async function handleGoogleLogin() {
-  try {
-    isLoading.value = true
-    // TODO: Implement Google login
-    await new Promise(resolve => setTimeout(resolve, 1500)) // Simulate API call
-    
-    // Success - redirect to home
+// Watch auth state to redirect if already logged in
+const { isAuthenticated } = useAuth()
+watchEffect(() => {
+  if (isAuthenticated.value) {
     router.push('/')
-  } catch (error) {
-    console.error('Google login error:', error)
-  } finally {
-    isLoading.value = false
   }
-}
+})
 
 // SEO
 useHead({
