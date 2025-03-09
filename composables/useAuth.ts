@@ -111,6 +111,7 @@ export function useAuth() {
       await signOut(auth)
       // Redirect to home
       navigateTo('/')
+      window.location.reload()
     } catch (e) {
       error.value = 'Failed to sign out. Please try again'
       console.error('Logout error:', e)

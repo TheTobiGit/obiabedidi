@@ -62,7 +62,7 @@ function handleAction(type: 'recipe' | 'collection') {
   // Navigate based on action type
   switch (type) {
     case 'recipe':
-      router.push('/recipes/new')
+      router.push('/recipes/create')
       break
     case 'collection':
       router.push('/collections/new')
