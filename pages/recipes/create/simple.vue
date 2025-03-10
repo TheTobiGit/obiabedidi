@@ -589,16 +589,28 @@ async function saveRecipe() {
     const allergens = Array.isArray(recipe.value.allergens) 
       ? recipe.value.allergens 
       : []
+
+    // Ensure meal type is a valid array
+    const mealType = Array.isArray(recipe.value.mealType)
+      ? recipe.value.mealType
+      : []
     
     // Update recipe object with all fields
-    recipe.value.ingredients = filteredIngredients
-    recipe.value.imageUrl = uploadedImageUrls.value[0] // Main image is the first one
-    recipe.value.gallery = uploadedImageUrls.value // All images in the gallery
-    recipe.value.cookTime = cookTime // Ensure cookTime is a number
-    recipe.value.allergens = allergens // Ensure allergens is an array
+    const recipeData: Partial<Recipe> = {
+      ...recipe.value,
+      ingredients: filteredIngredients,
+      imageUrl: uploadedImageUrls.value[0], // Main image is the first one
+      gallery: uploadedImageUrls.value, // All images in the gallery
+      cookTime: cookTime, // Ensure cookTime is a number
+      allergens: allergens, // Ensure allergens is an array
+      mealType: mealType, // Ensure mealType is properly set
+      creationMode: 'simple',
+      status: 'published',
+      isPublic: true
+    }
     
     // Create the recipe in Firestore
-    const createdRecipe = await createRecipe(recipe.value, [])
+    const createdRecipe = await createRecipe(recipeData, [])
     
     // Show success message
     successMessage.value = 'Recipe created successfully!'
