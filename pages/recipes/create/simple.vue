@@ -109,46 +109,110 @@
             />
           </div>
           
+          <!-- Meal Type -->
+          <div class="space-y-2">
+            <label class="block text-sm font-medium text-primary">
+              Meal Type <span class="text-red-500 font-bold text-lg">*</span>
+            </label>
+            <div class="grid grid-cols-2 gap-2">
+              <button
+                v-for="type in mealTypes"
+                :key="type"
+                type="button"
+                @click="recipe.mealType = recipe.mealType?.includes(type) ? recipe.mealType.filter(t => t !== type) : [...(recipe.mealType || []), type]"
+                class="relative px-3 py-2 rounded-xl text-sm transition-all duration-200 flex items-center justify-center gap-2"
+                :class="[
+                  recipe.mealType?.includes(type)
+                    ? 'bg-primary text-white'
+                    : 'text-muted hover:bg-surface-hover bg-surface border-theme'
+                ]"
+              >
+                <!-- Selected indicator -->
+                <div 
+                  v-if="recipe.mealType?.includes(type)"
+                  class="absolute -top-1 -right-1 w-5 h-5 bg-success rounded-full flex items-center justify-center shadow-lg"
+                >
+                  <Icon name="material-symbols:check" class="w-3.5 h-3.5 text-white" />
+                </div>
+                <Icon 
+                  :name="type === 'Breakfast' 
+                    ? 'material-symbols:breakfast-dining'
+                    : type === 'Lunch'
+                    ? 'material-symbols:lunch-dining'
+                    : type === 'Dinner'
+                    ? 'material-symbols:dinner-dining'
+                    : 'material-symbols:restaurant'"
+                  class="w-5 h-5"
+                />
+                {{ type }}
+              </button>
+            </div>
+          </div>
+          
           <!-- Allergens -->
           <div class="space-y-2">
             <label class="block text-sm font-medium text-primary">
               Common Allergens <span class="text-muted text-xs">(select all that apply)</span>
             </label>
             <div class="grid grid-cols-2 gap-2">
-              <div 
-                v-for="allergen in commonAllergens" 
+              <button
+                v-for="allergen in commonAllergens"
                 :key="allergen"
-                class="flex items-center"
+                type="button"
+                @click="toggleAllergen(allergen)"
+                class="relative px-3 py-2 rounded-xl text-sm transition-all duration-200 flex items-center justify-center gap-2"
+                :class="[
+                  recipe.allergens?.includes(allergen)
+                    ? 'bg-primary text-white'
+                    : 'text-muted hover:bg-surface-hover bg-surface border-theme'
+                ]"
               >
-                <input
-                  :id="`allergen-${allergen.toLowerCase()}`"
-                  type="checkbox"
-                  :value="allergen"
-                  v-model="recipe.allergens"
-                  class="h-4 w-4 rounded border-theme text-primary focus:ring-primary/50"
-                />
-                <label 
-                  :for="`allergen-${allergen.toLowerCase()}`" 
-                  class="ml-2 text-sm text-primary"
+                <!-- Selected indicator -->
+                <div 
+                  v-if="recipe.allergens?.includes(allergen)"
+                  class="absolute -top-1 -right-1 w-5 h-5 bg-success rounded-full flex items-center justify-center shadow-lg"
                 >
-                  {{ allergen }}
-                </label>
-              </div>
-              <div class="flex items-center">
-                <input
-                  id="allergen-none"
-                  type="checkbox"
-                  v-model="noAllergens"
-                  class="h-4 w-4 rounded border-theme text-primary focus:ring-primary/50"
-                  @change="handleNoAllergensChange"
+                  <Icon name="material-symbols:check" class="w-3.5 h-3.5 text-white" />
+                </div>
+                <Icon 
+                  :name="allergen === 'Dairy' 
+                    ? 'material-symbols:water-drop'
+                    : allergen === 'Eggs'
+                    ? 'game-icons:spotted-egg'
+                    : allergen === 'Nuts'
+                    ? 'game-icons:walnut'
+                    : allergen === 'Gluten'
+                    ? 'game-icons:wheat'
+                    : allergen === 'Seafood'
+                    ? 'game-icons:fish'
+                    : allergen === 'Soy'
+                    ? 'game-icons:soy'
+                    : 'game-icons:wheat'"
+                  class="w-5 h-5"
                 />
-                <label 
-                  for="allergen-none" 
-                  class="ml-2 text-sm text-primary"
+                {{ allergen }}
+              </button>
+              <!-- None option -->
+              <button
+                type="button"
+                @click="toggleNoAllergens"
+                class="relative px-3 py-2 rounded-xl text-sm transition-all duration-200 flex items-center justify-center gap-2"
+                :class="[
+                  noAllergens
+                    ? 'bg-primary text-white'
+                    : 'text-muted hover:bg-surface-hover bg-surface border-theme'
+                ]"
+              >
+                <!-- Selected indicator -->
+                <div 
+                  v-if="noAllergens"
+                  class="absolute -top-1 -right-1 w-5 h-5 bg-success rounded-full flex items-center justify-center shadow-lg"
                 >
-                  None
-                </label>
-              </div>
+                  <Icon name="material-symbols:check" class="w-3.5 h-3.5 text-white" />
+                </div>
+                <Icon name="material-symbols:check-circle" class="w-5 h-5" />
+                None
+              </button>
             </div>
           </div>
 
@@ -318,7 +382,7 @@
 // Import necessary composables and types
 import { ref, computed, watch } from 'vue'
 import { useRouter } from 'vue-router'
-import type { Recipe } from '~/types/recipe'
+import type { Recipe, MealType } from '~/types/recipe'
 import { useRecipes } from '~/composables/useRecipes'
 import { useAuth } from '~/composables/useAuth'
 import { useVideoUrl } from '~/composables/useVideoUrl'
@@ -356,13 +420,17 @@ const commonAllergens = [
   'Wheat'
 ]
 
+// Meal types
+const mealTypes: MealType[] = ['Breakfast', 'Lunch', 'Dinner', 'Snack']
+
 // Recipe object
 const recipe = ref<Partial<Recipe>>({
   name: '',
   description: '',
   videoUrl: '',
-  cookTime: 0, // Initialize cooking time
-  allergens: [], // Initialize allergens array
+  cookTime: 0,
+  allergens: [],
+  mealType: [], // Initialize as empty array since it's MealType[]
   creationMode: 'simple',
 })
 
@@ -387,7 +455,9 @@ const isFormValid = computed(() => {
          ingredients.value.every(ing => ing.trim().length > 0) &&
          hasSelectedImages &&
          !!recipe.value.videoUrl &&
-         hasValidCookTime
+         hasValidCookTime &&
+         Array.isArray(recipe.value.mealType) &&
+         recipe.value.mealType.length > 0
 })
 
 const isSubmitDisabled = computed(() => {
@@ -415,11 +485,32 @@ function removeIngredient(index: number) {
 }
 
 /**
- * Handle the "None" allergens checkbox change
+ * Toggle an allergen selection
+ * @param allergen The allergen to toggle
  */
-function handleNoAllergensChange() {
+function toggleAllergen(allergen: string) {
   if (noAllergens.value) {
-    // If "None" is checked, clear all other allergens
+    noAllergens.value = false
+  }
+  
+  if (!recipe.value.allergens) {
+    recipe.value.allergens = []
+  }
+  
+  const index = recipe.value.allergens.indexOf(allergen)
+  if (index === -1) {
+    recipe.value.allergens.push(allergen)
+  } else {
+    recipe.value.allergens.splice(index, 1)
+  }
+}
+
+/**
+ * Toggle the "None" allergens option
+ */
+function toggleNoAllergens() {
+  noAllergens.value = !noAllergens.value
+  if (noAllergens.value) {
     recipe.value.allergens = []
   }
 }

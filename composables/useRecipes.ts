@@ -16,7 +16,9 @@ import {
   orderBy, 
   limit, 
   getDocs,
-  Timestamp
+  Timestamp,
+  startAfter,
+  QueryConstraint
 } from 'firebase/firestore'
 import { 
   ref as storageRef, 
@@ -38,6 +40,9 @@ export function useRecipes() {
   // Reactive refs
   const isLoading = ref(false)
   const error = ref('')
+  const recipes = ref<Recipe[]>([])
+  const lastVisible = ref<any>(null) // For pagination
+  const hasMore = ref(true) // Whether there are more recipes to load
   
   /**
    * Upload a photo to Firebase Storage
@@ -173,10 +178,112 @@ export function useRecipes() {
     }
   }
   
+  /**
+   * Get all recipes with filtering and pagination
+   * @param options Filter and pagination options
+   * @returns Promise with array of recipes
+   */
+  async function getAllRecipes(options: {
+    filter?: 'all' | 'trending' | 'new' | 'top-rated';
+    servingSize?: string;
+    difficulty?: string;
+    mealType?: string;
+    pageSize?: number;
+    loadMore?: boolean;
+  } = {}) {
+    if (!db) throw new Error('Firestore not initialized')
+    
+    isLoading.value = true
+    error.value = ''
+    
+    try {
+      const constraints: QueryConstraint[] = [
+        where('isPublic', '==', true),
+        where('status', '==', 'published'),
+      ]
+      
+      // Apply main filter
+      if (options.filter) {
+        switch (options.filter) {
+          case 'trending':
+            constraints.push(where('isTrending', '==', true))
+            break
+          case 'new':
+            // Consider recipes created in the last 7 days as new
+            const sevenDaysAgo = new Date()
+            sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7)
+            constraints.push(where('createdAt', '>=', Timestamp.fromDate(sevenDaysAgo)))
+            break
+          case 'top-rated':
+            constraints.push(where('rating.average', '>=', 4.5))
+            break
+        }
+      }
+      
+      // Apply detailed filters
+      if (options.servingSize) {
+        constraints.push(where('servingSize', '==', options.servingSize))
+      }
+      if (options.difficulty) {
+        constraints.push(where('difficulty', '==', options.difficulty))
+      }
+      if (options.mealType) {
+        constraints.push(where('mealType', '==', options.mealType))
+      }
+      
+      // Add sorting
+      constraints.push(orderBy('createdAt', 'desc'))
+      
+      // Add pagination
+      const pageSize = options.pageSize || 10
+      constraints.push(limit(pageSize))
+      
+      // Add startAfter if loading more
+      if (options.loadMore && lastVisible.value) {
+        constraints.push(startAfter(lastVisible.value))
+      } else {
+        // Reset recipes if not loading more
+        recipes.value = []
+      }
+      
+      // Create and execute query
+      const q = query(collection(db, 'recipes'), ...constraints)
+      const querySnapshot = await getDocs(q)
+      
+      // Update lastVisible for pagination
+      lastVisible.value = querySnapshot.docs[querySnapshot.docs.length - 1]
+      hasMore.value = querySnapshot.docs.length === pageSize
+      
+      // Map documents to recipes
+      const newRecipes = querySnapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      })) as Recipe[]
+      
+      // Update recipes ref
+      if (options.loadMore) {
+        recipes.value.push(...newRecipes)
+      } else {
+        recipes.value = newRecipes
+      }
+      
+      return recipes.value
+    } catch (e: any) {
+      error.value = e.message || 'Failed to get recipes'
+      console.error('Error getting recipes:', e)
+      throw e
+    } finally {
+      isLoading.value = false
+    }
+  }
+  
   return {
     isLoading,
     error,
+    recipes,
+    hasMore,
     createRecipe,
-    getUserRecipes
+    getUserRecipes,
+    getAllRecipes
   }
 } 
