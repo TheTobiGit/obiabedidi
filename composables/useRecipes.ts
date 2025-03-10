@@ -185,9 +185,7 @@ export function useRecipes() {
    */
   async function getAllRecipes(options: {
     filter?: 'all' | 'trending' | 'new' | 'top-rated';
-    servingSize?: string;
-    difficulty?: string;
-    mealType?: string;
+    mealTypes?: string[];
     pageSize?: number;
     loadMore?: boolean;
   } = {}) {
@@ -220,15 +218,10 @@ export function useRecipes() {
         }
       }
       
-      // Apply detailed filters
-      if (options.servingSize) {
-        constraints.push(where('servingSize', '==', options.servingSize))
-      }
-      if (options.difficulty) {
-        constraints.push(where('difficulty', '==', options.difficulty))
-      }
-      if (options.mealType) {
-        constraints.push(where('mealType', '==', options.mealType))
+      // Apply meal type filter
+      if (options.mealTypes?.length) {
+        // Use array-contains-any to match any of the selected meal types
+        constraints.push(where('mealType', 'array-contains-any', options.mealTypes))
       }
       
       // Add sorting

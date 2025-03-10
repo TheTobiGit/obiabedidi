@@ -102,50 +102,6 @@
               v-show="isFilterOpen"
               class="mt-4 space-y-6 overflow-hidden transition-all duration-200"
             >
-              <!-- Serving Size -->
-              <div>
-                <h4 class="text-sm font-medium mb-3 text-primary">
-                  Serving Size
-                </h4>
-                <div class="flex flex-wrap gap-2">
-                  <button
-                    v-for="size in servingSizes"
-                    :key="size.id"
-                    @click="toggleServingSize(size.id)"
-                    class="px-3 py-1.5 rounded-lg text-sm transition-all duration-200"
-                    :class="[
-                      selectedFilters.servingSize === size.id
-                        ? 'bg-primary text-white'
-                        : 'text-muted hover:bg-surface-hover bg-surface border-theme'
-                    ]"
-                  >
-                    {{ size.label }}
-                  </button>
-                </div>
-              </div>
-
-              <!-- Difficulty -->
-              <div>
-                <h4 class="text-sm font-medium mb-3 text-primary">
-                  Difficulty
-                </h4>
-                <div class="flex flex-wrap gap-2">
-                  <button
-                    v-for="level in difficultyLevels"
-                    :key="level"
-                    @click="toggleDifficulty(level)"
-                    class="px-3 py-1.5 rounded-lg text-sm transition-all duration-200"
-                    :class="[
-                      selectedFilters.difficulty === level
-                        ? 'bg-primary text-white'
-                        : 'text-muted hover:bg-surface-hover bg-surface border-theme'
-                    ]"
-                  >
-                    {{ level }}
-                  </button>
-                </div>
-              </div>
-
               <!-- Meal Type -->
               <div>
                 <h4 class="text-sm font-medium mb-3 text-primary">
@@ -156,13 +112,30 @@
                     v-for="type in mealTypes"
                     :key="type"
                     @click="toggleMealType(type)"
-                    class="px-3 py-1.5 rounded-lg text-sm transition-all duration-200"
+                    class="relative px-3 py-1.5 rounded-lg text-sm transition-all duration-200"
                     :class="[
-                      selectedFilters.mealType === type
+                      selectedFilters.mealTypes.includes(type)
                         ? 'bg-primary text-white'
                         : 'text-muted hover:bg-surface-hover bg-surface border-theme'
                     ]"
                   >
+                    <!-- Selected indicator -->
+                    <div 
+                      v-if="selectedFilters.mealTypes.includes(type)"
+                      class="absolute -top-1 -right-1 w-5 h-5 bg-success rounded-full flex items-center justify-center shadow-lg"
+                    >
+                      <Icon name="material-symbols:check" class="w-3.5 h-3.5 text-white" />
+                    </div>
+                    <Icon 
+                      :name="type === 'Breakfast' 
+                        ? 'material-symbols:breakfast-dining'
+                        : type === 'Lunch'
+                        ? 'material-symbols:lunch-dining'
+                        : type === 'Dinner'
+                        ? 'material-symbols:dinner-dining'
+                        : 'material-symbols:restaurant'"
+                      class="w-5 h-5"
+                    />
                     {{ type }}
                   </button>
                 </div>
@@ -332,9 +305,7 @@ const showScrollToTop = ref(false)
 const isFilterOpen = ref(false)
 const activeFilter = ref<'all' | 'trending' | 'new' | 'top-rated'>('all')
 const selectedFilters = reactive({
-  servingSize: '',
-  difficulty: '',
-  mealType: ''
+  mealTypes: [] as string[]
 })
 
 // Filter options
@@ -345,26 +316,16 @@ const filters = [
   { id: 'top-rated' as const, name: 'Top Rated', icon: 'material-symbols:star' }
 ]
 
-const servingSizes = [
-  { id: 'small', label: '1-2 people' },
-  { id: 'medium', label: '3-4 people' },
-  { id: 'large', label: '5+ people' }
-]
-const difficultyLevels = ['Easy', 'Medium', 'Hard']
 const mealTypes = ['Breakfast', 'Lunch', 'Dinner', 'Snack']
 
 // Computed properties
 const hasActiveFilters = computed(() => {
-  return selectedFilters.servingSize !== '' ||
-    selectedFilters.difficulty !== '' ||
-    selectedFilters.mealType !== ''
+  return selectedFilters.mealTypes.length > 0
 })
 
 const activeFilterCount = computed(() => {
   let count = 0
-  if (selectedFilters.servingSize) count++
-  if (selectedFilters.difficulty) count++
-  if (selectedFilters.mealType) count++
+  if (selectedFilters.mealTypes.length) count++
   return count
 })
 
@@ -393,9 +354,7 @@ async function loadRecipes() {
   try {
     await getAllRecipes({
       filter: activeFilter.value === 'all' ? undefined : activeFilter.value,
-      servingSize: selectedFilters.servingSize || undefined,
-      difficulty: selectedFilters.difficulty || undefined,
-      mealType: selectedFilters.mealType || undefined,
+      mealTypes: selectedFilters.mealTypes.length ? selectedFilters.mealTypes : undefined,
       pageSize: 10
     })
   } catch (e) {
@@ -407,9 +366,7 @@ async function loadMore() {
   try {
     await getAllRecipes({
       filter: activeFilter.value === 'all' ? undefined : activeFilter.value,
-      servingSize: selectedFilters.servingSize || undefined,
-      difficulty: selectedFilters.difficulty || undefined,
-      mealType: selectedFilters.mealType || undefined,
+      mealTypes: selectedFilters.mealTypes.length ? selectedFilters.mealTypes : undefined,
       pageSize: 10,
       loadMore: true
     })
@@ -423,25 +380,18 @@ function toggleFilter(id: 'all' | 'trending' | 'new' | 'top-rated') {
   loadRecipes()
 }
 
-function toggleServingSize(size: string) {
-  selectedFilters.servingSize = selectedFilters.servingSize === size ? '' : size
-  loadRecipes()
-}
-
-function toggleDifficulty(level: string) {
-  selectedFilters.difficulty = selectedFilters.difficulty === level ? '' : level
-  loadRecipes()
-}
-
 function toggleMealType(type: string) {
-  selectedFilters.mealType = selectedFilters.mealType === type ? '' : type
+  const index = selectedFilters.mealTypes.indexOf(type)
+  if (index === -1) {
+    selectedFilters.mealTypes.push(type)
+  } else {
+    selectedFilters.mealTypes.splice(index, 1)
+  }
   loadRecipes()
 }
 
 function clearFilters() {
-  selectedFilters.servingSize = ''
-  selectedFilters.difficulty = ''
-  selectedFilters.mealType = ''
+  selectedFilters.mealTypes = []
   activeFilter.value = 'all'
   loadRecipes()
 }
