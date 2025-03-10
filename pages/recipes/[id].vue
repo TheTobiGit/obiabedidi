@@ -122,16 +122,27 @@
         <div class="px-4 py-6 space-y-6">
           <!-- Quick Info -->
           <div class="flex items-center justify-between">
-            <div class="flex items-center gap-1">
-              <Icon name="material-symbols:star" class="w-5 h-5 text-yellow-500" />
-              <span class="text-secondary">{{ recipe.rating?.average?.toFixed(1) || '0.0' }}</span>
-              <span class="text-sm text-muted">({{ recipe.rating?.count || 0 }})</span>
+            <div class="flex items-center gap-4">
+              <div class="flex items-center gap-1">
+                <Icon name="material-symbols:star" class="w-5 h-5 text-yellow-500" />
+                <span class="text-secondary">{{ recipe.rating?.average?.toFixed(1) || '0.0' }}</span>
+                <span class="text-sm text-muted">({{ recipe.rating?.count || 0 }})</span>
+              </div>
+              
+              <!-- Tip Button -->
+              <button
+                @click="handleTip"
+                class="flex items-center gap-1.5 p-1 px-1.5 rounded bg-emerald-500 text-white font-medium hover:bg-emerald-600 transition-colors shadow-sm hover:shadow-md"
+              >
+                <Icon name="material-symbols:payments-outline" class="w-5 h-5" />
+                <span>Tip Chef</span>
+              </button>
             </div>
             
             <!-- View Count -->
             <div class="flex items-center gap-1">
               <Icon name="material-symbols:visibility-outline" class="w-5 h-5 text-muted" />
-              <span class="text-sm text-secondary">{{ recipe.viewCount || 0 }} views</span>
+              <span class="text-sm text-secondary">{{ recipe.viewCount || 0 }} view(s)</span>
             </div>
           </div>
 
@@ -181,20 +192,6 @@
             </div>
           </div>
 
-          <!-- Video Section -->
-          <div v-if="recipe.videoUrl" class="p-4 rounded-xl bg-surface border-theme">
-            <h3 class="text-lg font-medium text-primary mb-4">Watch Recipe Video</h3>
-            <div class="relative w-full pb-[56.25%]">
-              <iframe
-                :src="getEmbedUrl(recipe.videoUrl)"
-                class="absolute inset-0 w-full h-full rounded-lg"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen
-              ></iframe>
-            </div>
-          </div>
-
           <!-- Ingredients Section -->
           <div class="p-4 rounded-xl bg-surface border-theme">
             <div class="flex items-center justify-between mb-4">
@@ -233,6 +230,20 @@
                 </span>
               </li>
             </ul>
+          </div>
+
+          <!-- Video Section -->
+          <div v-if="recipe.videoUrl" class="p-4 rounded-xl bg-surface border-theme">
+            <h3 class="text-lg font-medium text-primary mb-4">Watch Recipe Video</h3>
+            <div class="relative w-full pb-[56.25%]">
+              <iframe
+                :src="getEmbedUrl(recipe.videoUrl)"
+                class="absolute inset-0 w-full h-full rounded-lg"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              ></iframe>
+            </div>
           </div>
 
           <!-- Instructions Section -->
@@ -392,6 +403,12 @@ function getEmbedUrl(url: string) {
   
   // Return original URL if not recognized
   return url
+}
+
+// Function to handle tipping (placeholder for now)
+function handleTip() {
+  // TODO: Implement tipping functionality
+  console.log('Tip button clicked')
 }
 
 // Fetch recipe on mount
