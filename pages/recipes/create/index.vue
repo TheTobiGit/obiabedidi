@@ -60,11 +60,11 @@
                   </li>
                   <li class="flex items-center gap-2">
                     <Icon name="material-symbols:check-circle" class="w-4 h-4 text-success" />
-                    <span>Photo upload</span>
+                    <span>Multiple photo uploads</span>
                   </li>
                   <li class="flex items-center gap-2">
                     <Icon name="material-symbols:check-circle" class="w-4 h-4 text-success" />
-                    <span>Video link (optional)</span>
+                    <span>Instruction video link</span>
                   </li>
                 </ul>
                 

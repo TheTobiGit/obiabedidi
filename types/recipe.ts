@@ -4,6 +4,8 @@
  * Defines types for recipes in the Obiabedidi application
  */
 
+import type { Timestamp } from 'firebase/firestore'
+
 /**
  * Difficulty levels for recipes
  */
@@ -68,8 +70,8 @@ export interface Recipe {
   description?: string;
   
   /** Creation and update timestamps */
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: Timestamp;
+  updatedAt: Timestamp;
   
   /** Author information */
   authorId: string;
