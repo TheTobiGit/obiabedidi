@@ -18,6 +18,17 @@ export default defineNuxtConfig({
     'nuxt-vuefire'
   ],
 
+  // Add runtime config for Cloudinary
+  runtimeConfig: {
+    public: {
+      cloudinary: {
+        cloudName: process.env.CLOUDINARY_CLOUD_NAME,
+        apiKey: process.env.CLOUDINARY_API_KEY,
+        uploadPreset: process.env.CLOUDINARY_UPLOAD_PRESET
+      }
+    }
+  },
+
   vuefire: {
     auth: {
       enabled: true
