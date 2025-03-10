@@ -132,7 +132,7 @@
               <!-- Tip Button -->
               <button
                 @click="handleTip"
-                class="flex items-center gap-1.5 p-1 px-1.5 rounded bg-emerald-500 text-white font-medium hover:bg-emerald-600 transition-colors shadow-sm hover:shadow-md"
+                class="flex items-center gap-1.5 p-1 px-1.5 rounded-sm bg-emerald-500 text-white font-medium hover:bg-emerald-600 transition-colors shadow-sm hover:shadow-md"
               >
                 <Icon name="material-symbols:payments-outline" class="w-5 h-5" />
                 <span>Tip Chef</span>
@@ -313,12 +313,40 @@ const route = useRoute()
 const { 
   getRecipeById, 
   isLoading, 
-  error 
+  error,
+  incrementViews
 } = useRecipes()
 
 // Recipe data
 const recipe = ref<Recipe | null>(null)
 const isSaved = ref(false)
+
+// Constants
+const VIEW_COOLDOWN = 1000 * 60 * 60 // 1 hour in milliseconds
+
+/**
+ * Check if enough time has passed since last view
+ * @param recipeId The recipe ID to check
+ * @returns boolean indicating if view should be counted
+ */
+function shouldCountView(recipeId: string): boolean {
+  const lastViewKey = `recipe_${recipeId}_last_view`
+  const lastView = localStorage.getItem(lastViewKey)
+  
+  if (!lastView) return true
+  
+  const timeSinceLastView = Date.now() - parseInt(lastView)
+  return timeSinceLastView > VIEW_COOLDOWN
+}
+
+/**
+ * Record view timestamp in localStorage
+ * @param recipeId The recipe ID to record
+ */
+function recordView(recipeId: string) {
+  const lastViewKey = `recipe_${recipeId}_last_view`
+  localStorage.setItem(lastViewKey, Date.now().toString())
+}
 
 // Computed properties
 const showInstructions = computed(() => {
@@ -339,6 +367,12 @@ async function fetchRecipe() {
     const recipeId = route.params.id as string
     const fetchedRecipe = await getRecipeById(recipeId)
     recipe.value = fetchedRecipe
+    
+    // Check if we should count this view
+    if (shouldCountView(recipeId)) {
+      await incrementViews(recipeId)
+      recordView(recipeId)
+    }
   } catch (err) {
     console.error('Error fetching recipe:', err)
   }

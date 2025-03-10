@@ -19,7 +19,8 @@ import {
   Timestamp,
   startAfter,
   QueryConstraint,
-  getDoc
+  getDoc,
+  runTransaction
 } from 'firebase/firestore'
 import { 
   ref as storageRef, 
@@ -306,6 +307,38 @@ export function useRecipes() {
     }
   }
   
+  /**
+   * Increment the view count for a recipe
+   * @param recipeId The ID of the recipe to increment views for
+   */
+  async function incrementViews(recipeId: string): Promise<void> {
+    if (!db) throw new Error('Firestore not initialized')
+    
+    try {
+      const recipeRef = doc(db, 'recipes', recipeId)
+      
+      // Use a transaction to ensure atomic update
+      await runTransaction(db, async (transaction) => {
+        const recipeDoc = await transaction.get(recipeRef)
+        
+        if (!recipeDoc.exists()) {
+          throw new Error('Recipe not found')
+        }
+        
+        // Get current view count or default to 0
+        const currentViews = recipeDoc.data()?.viewCount || 0
+        
+        // Update the view count
+        transaction.update(recipeRef, {
+          viewCount: currentViews + 1
+        })
+      })
+    } catch (e: any) {
+      console.error('Error incrementing views:', e)
+      // Don't throw error to user since this is not critical
+    }
+  }
+  
   return {
     isLoading,
     error,
@@ -314,6 +347,7 @@ export function useRecipes() {
     createRecipe,
     getUserRecipes,
     getAllRecipes,
-    getRecipeById
+    getRecipeById,
+    incrementViews
   }
 } 
