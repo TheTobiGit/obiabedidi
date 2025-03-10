@@ -18,7 +18,8 @@ import {
   getDocs,
   Timestamp,
   startAfter,
-  QueryConstraint
+  QueryConstraint,
+  getDoc
 } from 'firebase/firestore'
 import { 
   ref as storageRef, 
@@ -170,8 +171,43 @@ export function useRecipes() {
       
       return recipes
     } catch (e: any) {
-      error.value = e.message || 'Failed to get recipes'
-      console.error('Error getting recipes:', e)
+      error.value = e.message || 'Failed to get user recipes'
+      console.error('Error getting user recipes:', e)
+      throw e
+    } finally {
+      isLoading.value = false
+    }
+  }
+  
+  /**
+   * Get a recipe by ID
+   * @param id The recipe ID
+   * @returns The recipe
+   */
+  async function getRecipeById(id: string): Promise<Recipe> {
+    if (!db) throw new Error('Firestore not initialized')
+    
+    isLoading.value = true
+    error.value = ''
+    
+    try {
+      // Get the recipe document
+      const docRef = doc(db, 'recipes', id)
+      const docSnap = await getDoc(docRef)
+      
+      // Check if the recipe exists
+      if (!docSnap.exists()) {
+        throw new Error('Recipe not found')
+      }
+      
+      // Return the recipe data
+      return {
+        id: docSnap.id,
+        ...docSnap.data()
+      } as Recipe
+    } catch (e: any) {
+      error.value = e.message || 'Failed to get recipe'
+      console.error('Error getting recipe:', e)
       throw e
     } finally {
       isLoading.value = false
@@ -277,6 +313,7 @@ export function useRecipes() {
     hasMore,
     createRecipe,
     getUserRecipes,
-    getAllRecipes
+    getAllRecipes,
+    getRecipeById
   }
 } 
