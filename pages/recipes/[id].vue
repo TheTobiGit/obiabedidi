@@ -35,14 +35,14 @@
           />
         </button>
         
-        <!-- Share Button -->
-        <button
-          @click="shareRecipe"
-          class="p-2 rounded-xl transition-colors flex items-center text-muted hover:bg-surface-hover"
-          aria-label="Share recipe"
-        >
-          <Icon name="material-symbols:share" class="w-5 h-5" />
-        </button>
+      <!-- Share Button -->
+      <button
+        @click="shareRecipe"
+        class="p-2 rounded-xl transition-colors flex items-center text-muted hover:bg-surface-hover"
+        aria-label="Share recipe"
+      >
+        <Icon name="material-symbols:share" class="w-5 h-5" />
+      </button>
       </div>
     </div>
 
@@ -123,8 +123,8 @@
           <!-- Quick Info -->
           <div class="flex items-center justify-between">
             <div class="flex items-center gap-4">
-              <div class="flex items-center gap-1">
-                <Icon name="material-symbols:star" class="w-5 h-5 text-yellow-500" />
+            <div class="flex items-center gap-1">
+              <Icon name="material-symbols:star" class="w-5 h-5 text-yellow-500" />
                 <span class="text-secondary">{{ recipe.rating?.average?.toFixed(1) || '0.0' }}</span>
                 <span class="text-sm text-muted">({{ recipe.rating?.count || 0 }})</span>
               </div>
@@ -181,7 +181,7 @@
                   >
                     {{ type }}
                   </span>
-                </div>
+              </div>
               </div>
               
               <!-- Cooking Time -->
@@ -277,8 +277,8 @@
                 </p>
               </li>
             </ol>
-          </div>
-          
+      </div>
+
           <!-- Gallery Section -->
           <div v-if="recipe.gallery && recipe.gallery.length > 1" class="space-y-3">
             <h3 class="text-lg font-medium text-primary">Gallery</h3>

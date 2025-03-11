@@ -160,10 +160,19 @@
         <!-- Browse Button -->
         <button 
           @click="showAll"
-          class="w-full flex items-center justify-center gap-2 px-6 py-4 rounded-2xl text-sm font-medium transition-all duration-200 bg-surface text-primary hover:bg-surface-hover"
+          class="w-full flex items-center justify-center gap-2 px-6 py-4 rounded-2xl text-sm font-medium transition-all duration-200 bg-surface text-primary hover:bg-surface-hover mb-3"
         >
           <Icon name="material-symbols:view-list" class="w-5 h-5" />
           <span>Browse recipes</span>
+        </button>
+        
+        <!-- Cooking Studio Button -->
+        <button 
+          @click="navigateTo('/studio')"
+          class="w-full flex items-center justify-center gap-2 px-6 py-4 rounded-2xl text-sm font-medium transition-all duration-200 bg-surface text-primary hover:bg-surface-hover"
+        >
+          <Icon name="material-symbols:cooking" class="w-5 h-5" />
+          <span>Cooking Studio</span>
         </button>
       </div>
     </main>

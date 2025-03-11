@@ -31,50 +31,25 @@
         </div>
 
         <!-- Mode Selection Cards -->
-        <div class="space-y-4">
+        <div class="space-y-3">
           <!-- Simple Mode Card -->
           <button 
             @click="selectMode('simple')"
-            class="w-full p-5 rounded-xl border border-theme bg-surface hover:bg-surface-hover transition-colors duration-200 text-left"
+            class="w-full p-4 rounded-xl border border-theme bg-surface hover:bg-surface-hover transition-colors duration-200 text-left"
           >
-            <div class="flex items-start gap-4">
+            <div class="flex items-center gap-3">
               <!-- Icon -->
-              <div class="p-3 rounded-lg bg-primary/10 text-primary">
-                <Icon name="material-symbols:cooking-outline" class="w-8 h-8" />
+              <div class="p-2.5 rounded-lg bg-primary/10 text-primary">
+                <Icon name="material-symbols:cooking-outline" class="w-6 h-6" />
               </div>
               
               <!-- Content -->
               <div class="flex-1">
-                <h3 class="text-lg font-semibold text-primary mb-1">Simple Mode</h3>
-                <p class="text-muted text-sm mb-3">Quick and easy recipe creation with minimal details</p>
-                
-                <!-- Features -->
-                <ul class="space-y-2 text-sm">
-                  <li class="flex items-center gap-2">
-                    <Icon name="material-symbols:check-circle" class="w-4 h-4 text-success" />
-                    <span>Recipe name and description</span>
-                  </li>
-                  <li class="flex items-center gap-2">
-                    <Icon name="material-symbols:check-circle" class="w-4 h-4 text-success" />
-                    <span>Simple ingredients list</span>
-                  </li>
-                  <li class="flex items-center gap-2">
-                    <Icon name="material-symbols:check-circle" class="w-4 h-4 text-success" />
-                    <span>Multiple photo uploads</span>
-                  </li>
-                  <li class="flex items-center gap-2">
-                    <Icon name="material-symbols:check-circle" class="w-4 h-4 text-success" />
-                    <span>Instruction video link</span>
-                  </li>
-                </ul>
-                
-                <!-- Complexity Indicator -->
-                <div class="flex items-center gap-1 mt-4">
-                  <div class="w-2 h-2 rounded-full bg-primary"></div>
-                  <div class="w-2 h-2 rounded-full bg-gray-300 dark:bg-gray-700"></div>
-                  <div class="w-2 h-2 rounded-full bg-gray-300 dark:bg-gray-700"></div>
-                  <span class="text-xs text-muted ml-2">Quick (2-3 minutes)</span>
+                <div class="flex items-center justify-between">
+                  <h3 class="text-base font-semibold text-primary">Simple Mode</h3>
+                  <span class="text-xs text-muted px-2 py-1 rounded-full bg-surface-hover">2-3 min</span>
                 </div>
+                <p class="text-muted text-sm mt-1">Quick recipe creation with basic details and ingredients list</p>
               </div>
             </div>
           </button>
@@ -82,51 +57,21 @@
           <!-- Advanced Mode Card -->
           <button 
             disabled
-            class="w-full p-5 rounded-xl border border-theme bg-surface/50 opacity-75 cursor-not-allowed transition-colors duration-200 text-left relative group"
+            class="w-full p-4 rounded-xl border border-theme bg-surface/50 opacity-75 cursor-not-allowed transition-colors duration-200 text-left"
           >
-            <!-- Coming Soon Badge -->
-            <div class="absolute top-4 right-4 px-2 py-1 rounded-full bg-primary/10 text-primary text-xs font-medium">
-              Coming Soon
-            </div>
-            
-            <div class="flex items-start gap-4">
+            <div class="flex items-center gap-3">
               <!-- Icon -->
-              <div class="p-3 rounded-lg bg-primary/10 text-primary/50">
-                <Icon name="material-symbols:restaurant-menu" class="w-8 h-8" />
+              <div class="p-2.5 rounded-lg bg-primary/10 text-primary/50">
+                <Icon name="material-symbols:restaurant-menu" class="w-6 h-6" />
               </div>
               
               <!-- Content -->
               <div class="flex-1">
-                <h3 class="text-lg font-semibold text-primary/75 mb-1">Advanced Mode</h3>
-                <p class="text-muted text-sm mb-3">Detailed recipe creation with comprehensive information</p>
-                
-                <!-- Features -->
-                <ul class="space-y-2 text-sm opacity-75">
-                  <li class="flex items-center gap-2">
-                    <Icon name="material-symbols:check-circle" class="w-4 h-4 text-success/50" />
-                    <span>All simple mode features</span>
-                  </li>
-                  <li class="flex items-center gap-2">
-                    <Icon name="material-symbols:check-circle" class="w-4 h-4 text-success/50" />
-                    <span>Structured ingredients with amounts</span>
-                  </li>
-                  <li class="flex items-center gap-2">
-                    <Icon name="material-symbols:check-circle" class="w-4 h-4 text-success/50" />
-                    <span>Step-by-step instructions</span>
-                  </li>
-                  <li class="flex items-center gap-2">
-                    <Icon name="material-symbols:check-circle" class="w-4 h-4 text-success/50" />
-                    <span>Detailed categorization and timing</span>
-                  </li>
-                </ul>
-                
-                <!-- Complexity Indicator -->
-                <div class="flex items-center gap-1 mt-4 opacity-75">
-                  <div class="w-2 h-2 rounded-full bg-primary/50"></div>
-                  <div class="w-2 h-2 rounded-full bg-primary/50"></div>
-                  <div class="w-2 h-2 rounded-full bg-primary/50"></div>
-                  <span class="text-xs text-muted ml-2">Detailed (5-10 minutes)</span>
+                <div class="flex items-center justify-between">
+                  <h3 class="text-base font-semibold text-primary/75">Advanced Mode</h3>
+                  <span class="text-xs text-muted px-2 py-1 rounded-full bg-surface-hover/50">Coming Soon</span>
                 </div>
+                <p class="text-muted text-sm mt-1">Detailed recipe with structured ingredients and step-by-step instructions</p>
               </div>
             </div>
           </button>
